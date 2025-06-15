@@ -16,6 +16,13 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 using RecipeShareWebApi.Helper;
 using RecipeShareWebApi.Converters;
 using RecipeShareWebApi.Middleware;
+using RecipeShareLibrary.Manager.Rights;
+using RecipeShareLibrary.Manager.Rights.Implementation;
+using RecipeShareWebApi.Services.Rights;
+using RecipeShareWebApi.Services.Rights.Implementation;
+using RecipeShareLibrary.Validator.Rights;
+using RecipeShareLibrary.Validator.Rights.Implementation;
+using Microsoft.Extensions.Options;
 
 try
 {
@@ -152,6 +159,11 @@ try
     #endregion
 
     #region Rights
+
+    builder.Services.AddScoped<IUserManager, UserManager>();
+    builder.Services.AddScoped<IUserTokenManager, UserTokenManager>();
+    builder.Services.AddScoped<IRightManager, RightManager>();
+
     #endregion
 
     #endregion
@@ -163,6 +175,11 @@ try
     #endregion
 
     #region Rights
+
+    builder.Services.AddTransient<IAuthorisationService, AuthorisationService>();
+    builder.Services.AddTransient<IUserService, UserService>();
+    builder.Services.AddTransient<IRightService, RightService>();
+
     #endregion
 
     #endregion
@@ -174,6 +191,9 @@ try
     #endregion
 
     #region Rights
+
+    builder.Services.AddSingleton<IUserValidator, UserValidator>(options => new UserValidator(options.GetRequiredService<IOptions<ApplicationSettings>>().Value));
+
     #endregion
 
     #endregion
@@ -280,6 +300,7 @@ try
     app.UseAuthorization();
 
     app.UseExceptionHandler(options => options.UseMiddleware<ExceptionMiddleware>());
+    app.UseMiddleware<JwtMiddleware>();
 
     app.MapControllerRoute("default", "api/v{version}/{controller}/{action}")
         .RequireAuthorization()
