@@ -4,6 +4,8 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea
+RecipeShareWebApi/appsettings.Development.json
+RecipeShareWebApi/appsettings.json
 RecipeShareWebApi.sln.DotSettings
 RecipeShareWebApi.sln.DotSettings.user
 /RecipeShareWebApi.sln.DotSettings.user
