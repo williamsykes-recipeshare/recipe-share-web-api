@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShareWebApi", "RecipeShareWebApi\RecipeShareWebApi.csproj", "{93D18638-F98E-423F-88E9-0DD6DC40A4A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{D6578753-21B6-417F-BDEC-654E8EA6623E}"
+	ProjectSection(SolutionItems) = preProject
+		SQLScripts\setup.sql = SQLScripts\setup.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShareLibrary", "RecipeShareLibrary\RecipeShareLibrary.csproj", "{DA47B2BD-978A-421C-821D-41D15EEB7DF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93D18638-F98E-423F-88E9-0DD6DC40A4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D18638-F98E-423F-88E9-0DD6DC40A4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D18638-F98E-423F-88E9-0DD6DC40A4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D18638-F98E-423F-88E9-0DD6DC40A4A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA47B2BD-978A-421C-821D-41D15EEB7DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA47B2BD-978A-421C-821D-41D15EEB7DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA47B2BD-978A-421C-821D-41D15EEB7DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA47B2BD-978A-421C-821D-41D15EEB7DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
