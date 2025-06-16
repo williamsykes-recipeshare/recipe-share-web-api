@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using RecipeShareLibrary.Model.MasterData.Implementation;
+using RecipeShareLibrary.Model.Recipes.Implementation;
 using RecipeShareLibrary.Model.Rights.Implementation;
 using RecipeShareLibrary.ModelBuilders;
 
@@ -19,7 +21,18 @@ public class RecipeShareDbContext(DbContextOptions<RecipeShareDbContext> options
 
     #region Master Data
 
+    public virtual DbSet<Ingredient> Ingredients => Set<Ingredient>();
+    public virtual DbSet<Step> Steps => Set<Step>();
+
     #endregion
+
+    #region Recipes
+
+    public virtual DbSet<Recipe> Recipes => Set<Recipe>();
+    public virtual DbSet<RecipeIngredient> RecipeIngredients => Set<RecipeIngredient>();
+
+    #endregion
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -30,6 +43,8 @@ public class RecipeShareDbContext(DbContextOptions<RecipeShareDbContext> options
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.BuildRights();
+        modelBuilder.BuildMasterData();
+        modelBuilder.BuildRecipes();
 
         if (Database.ProviderName != "Microsoft.EntityFrameworkCore.Sqlite") return;
 

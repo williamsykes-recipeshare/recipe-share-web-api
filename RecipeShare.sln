@@ -4,7 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShareWebApi", "Recipe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{D6578753-21B6-417F-BDEC-654E8EA6623E}"
 	ProjectSection(SolutionItems) = preProject
-		SQLScripts\setup.sql = SQLScripts\setup.sql
+		SQLScripts\1 - user.sql = SQLScripts\1 - user.sql
+		SQLScripts\2 - recipe.sql = SQLScripts\2 - recipe.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShareLibrary", "RecipeShareLibrary\RecipeShareLibrary.csproj", "{DA47B2BD-978A-421C-821D-41D15EEB7DF8}"

@@ -8,7 +8,7 @@ public interface IUserToken
     long Id { get; set; }
     long UserId { get; set; }
     User? User { get; set; }
-    public Guid Guid { get; set; }
+    Guid Guid { get; set; }
     DateTime ExpirationDate { get; set; }
     string Token { get; set; }
     string UserAgent { get; set; }
