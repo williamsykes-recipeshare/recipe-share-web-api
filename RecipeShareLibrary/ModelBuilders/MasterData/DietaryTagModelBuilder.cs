@@ -4,19 +4,19 @@ using RecipeShareLibrary.Helper;
 
 namespace RecipeShareLibrary.ModelBuilders.MasterData;
 
-public static class IngredientModelBuilder
+public static class DietaryTagModelBuilder
 {
-    private const string Prefix = "ing";
+    private const string Prefix = "dtg";
 
     public static void Build(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Ingredient>(entity =>
+        modelBuilder.Entity<DietaryTag>(entity =>
         {
-            entity.ToTable("mtn_ingredient");
+            entity.ToTable("mtn_dietary_tag");
 
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasIndex(e => e.Guid).HasDatabaseName("ingGuid").IsUnique();
+            entity.HasIndex(e => e.Guid).HasDatabaseName("dtgGuid").IsUnique();
 
             entity.Property(m => m.Id).HasColumnNameWithPrefix(Prefix).ValueGeneratedOnAdd();
             entity.Property(m => m.Guid).HasColumnNameWithPrefix(Prefix)

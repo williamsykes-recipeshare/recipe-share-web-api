@@ -9,5 +9,6 @@ public class Recipe : BaseModel, IRecipe
     public int CookingTimeMinutes { get; set; }
 
     public ICollection<RecipeIngredient>? RecipeIngredients { get; set; }
+    public ICollection<RecipeDietaryTag>? RecipeDietaryTags { get; set; }
     public ICollection<Step>? Steps { get; set; }
 }

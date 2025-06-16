@@ -9,5 +9,6 @@ public static class RecipesModelBuilder
     {
         RecipeModelBuilder.Build(modelBuilder);
         RecipeIngredientModelBuilder.Build(modelBuilder);
+        RecipeDietaryTagModelBuilder.Build(modelBuilder);
     }
 }

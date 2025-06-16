@@ -163,6 +163,43 @@ public class RecipeManager(
 
         #endregion
 
+        #region Dietary Tags
+
+        if (result.RecipeDietaryTags != null && save.RecipeDietaryTags != null)
+        {
+            foreach (var resultRecipeDietaryTag in result.RecipeDietaryTags)
+            {
+                resultRecipeDietaryTag.IsActive = false;
+                resultRecipeDietaryTag.UpdatedById = user.Id;
+                resultRecipeDietaryTag.UpdatedByName = user.Name;
+            }
+
+            foreach (var saveRecipeDietaryTag in save.RecipeDietaryTags)
+            {
+                var recipeDietaryTag = result.RecipeDietaryTags.SingleOrDefault(x => x.DietaryTagId == saveRecipeDietaryTag.DietaryTagId);
+
+                if (recipeDietaryTag == null)
+                {
+                    recipeDietaryTag = new RecipeDietaryTag
+                    {
+                        DietaryTagId = saveRecipeDietaryTag.DietaryTagId,
+                        CreatedById = user.Id,
+                        CreatedByName = user.Name,
+                        UpdatedById = user.Id,
+                        UpdatedByName = user.Name,
+                    };
+
+                    result.RecipeDietaryTags.Add(recipeDietaryTag);
+                }
+
+                recipeDietaryTag.IsActive = true;
+                recipeDietaryTag.UpdatedById = user.Id;
+                recipeDietaryTag.UpdatedByName = user.Name;
+            }
+        }
+
+        #endregion
+
         #region Steps
 
         if (result.Steps != null && save.Steps != null)
@@ -175,6 +212,7 @@ public class RecipeManager(
                 {
                     step = new Step
                     {
+                        Guid = saveStep.Guid,
                         Name = saveStep.Name,
                         CreatedById = user.Id,
                         CreatedByName = user.Name,

@@ -22,6 +22,7 @@ public class RecipeShareDbContext(DbContextOptions<RecipeShareDbContext> options
     #region Master Data
 
     public virtual DbSet<Ingredient> Ingredients => Set<Ingredient>();
+    public virtual DbSet<DietaryTag> DietaryTags => Set<DietaryTag>();
     public virtual DbSet<Step> Steps => Set<Step>();
 
     #endregion
@@ -30,6 +31,7 @@ public class RecipeShareDbContext(DbContextOptions<RecipeShareDbContext> options
 
     public virtual DbSet<Recipe> Recipes => Set<Recipe>();
     public virtual DbSet<RecipeIngredient> RecipeIngredients => Set<RecipeIngredient>();
+    public virtual DbSet<RecipeDietaryTag> RecipeDietaryTags => Set<RecipeDietaryTag>();
 
     #endregion
 

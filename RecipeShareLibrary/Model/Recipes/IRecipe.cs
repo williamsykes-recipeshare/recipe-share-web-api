@@ -10,5 +10,6 @@ public interface IRecipe : IBaseModel
     int CookingTimeMinutes { get; set; }
 
     ICollection<RecipeIngredient>? RecipeIngredients { get; set; }
+    ICollection<RecipeDietaryTag>? RecipeDietaryTags { get; set; }
     ICollection<Step>? Steps { get; set; }
 }
