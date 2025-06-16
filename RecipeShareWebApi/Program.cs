@@ -170,6 +170,7 @@ try
     #region Master Data
 
     builder.Services.AddScoped<IIngredientManager, IngredientManager>();
+    builder.Services.AddScoped<IDietaryTagManager, DietaryTagManager>();
 
     #endregion
 
@@ -195,6 +196,7 @@ try
     #region Master Data
 
     builder.Services.AddTransient<IIngredientService, IngredientService>();
+    builder.Services.AddTransient<IDietaryTagService, DietaryTagService>();
 
     #endregion
 
@@ -220,10 +222,11 @@ try
     #region Master Data
 
     builder.Services.AddSingleton<IIngredientValidator, IngredientValidator>();
+    builder.Services.AddSingleton<IDietaryTagValidator, DietaryTagValidator>();
 
     #endregion
 
-    #region Master Data
+    #region Recipes
 
     builder.Services.AddSingleton<IRecipeValidator, RecipeValidator>();
 
