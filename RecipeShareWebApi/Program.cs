@@ -23,6 +23,18 @@ using RecipeShareWebApi.Services.Rights.Implementation;
 using RecipeShareLibrary.Validator.Rights;
 using RecipeShareLibrary.Validator.Rights.Implementation;
 using Microsoft.Extensions.Options;
+using RecipeShareLibrary.Manager.MasterData;
+using RecipeShareLibrary.Manager.MasterData.Implementation;
+using RecipeShareWebApi.Services.MasterData;
+using RecipeShareWebApi.Services.MasterData.Implementation;
+using RecipeShareLibrary.Validator.MasterData;
+using RecipeShareLibrary.Validator.MasterData.Implementation;
+using RecipeShareLibrary.Manager.Recipes;
+using RecipeShareLibrary.Manager.Recipes.Implementation;
+using RecipeShareWebApi.Services.Recipes;
+using RecipeShareWebApi.Services.Recipes.Implementation;
+using RecipeShareLibrary.Validator.Recipes;
+using RecipeShareLibrary.Validator.Recipes.Implementation;
 
 try
 {
@@ -156,6 +168,15 @@ try
     #region Managers
 
     #region Master Data
+
+    builder.Services.AddScoped<IIngredientManager, IngredientManager>();
+
+    #endregion
+
+    #region Recipes
+
+    builder.Services.AddScoped<IRecipeManager, RecipeManager>();
+
     #endregion
 
     #region Rights
@@ -172,6 +193,15 @@ try
     #region Services
 
     #region Master Data
+
+    builder.Services.AddTransient<IIngredientService, IngredientService>();
+
+    #endregion
+
+    #region Recipes
+
+    builder.Services.AddTransient<IRecipeService, RecipeService>();
+
     #endregion
 
     #region Rights
@@ -188,6 +218,15 @@ try
     #region Validator
 
     #region Master Data
+
+    builder.Services.AddSingleton<IIngredientValidator, IngredientValidator>();
+
+    #endregion
+
+    #region Master Data
+
+    builder.Services.AddSingleton<IRecipeValidator, RecipeValidator>();
+
     #endregion
 
     #region Rights

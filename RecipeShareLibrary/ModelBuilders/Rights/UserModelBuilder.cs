@@ -1,35 +1,33 @@
 using RecipeShareLibrary.Model.Rights.Implementation;
 using Microsoft.EntityFrameworkCore;
+using RecipeShareLibrary.Helper;
 
 namespace RecipeShareLibrary.ModelBuilders.Rights;
 
 public static class UserModelBuilder
 {
+    private const string Prefix = "usr";
+
     public static void Build(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("rgh_user");
 
-            entity.HasKey(e => e.Id).HasName("rgh_user_pk");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.HasIndex(e => e.Guid).HasDatabaseName("rgh_user_guid_uniq_k").IsUnique();
+            entity.HasIndex(e => e.Guid).HasDatabaseName("usrGuid").IsUnique();
+            entity.HasIndex(e => e.Email).HasDatabaseName("usrEmail").IsUnique();
 
-            entity.Property(m => m.Id).HasColumnName("usrId").ValueGeneratedOnAdd();
-            entity.Property(m => m.Guid).HasColumnName("usrGuid")
+            entity.Property(m => m.Id).HasColumnNameWithPrefix(Prefix).ValueGeneratedOnAdd();
+            entity.Property(m => m.Guid).HasColumnNameWithPrefix(Prefix)
                 .HasConversion(x => x.ToByteArray(), x =>new Guid(x)).IsRequired();
-            entity.Property(m => m.Name).HasColumnName("usrName").HasMaxLength(255).IsUnicode(false).IsRequired();
-            entity.Property(m => m.Email).HasColumnName("usrEmail").IsRequired();
-            entity.Property(m => m.LastLogin).HasColumnName("usrLastLogin");
-            entity.Property(m => m.IsActive).HasColumnName("usrIsActive").HasDefaultValue(true).IsRequired();
-            entity.Property(m => m.CreatedById).HasColumnName("usrCreatedBy");
-            entity.Property(m => m.CreatedByName).HasColumnName("usrCreatedByName").HasMaxLength(255).IsUnicode(false);
-            entity.Property(m => m.CreatedOn).HasColumnName("usrCreatedOn").HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .ValueGeneratedOnAdd();
-            entity.Property(m => m.UpdatedById).HasColumnName("usrUpdatedBy");
-            entity.Property(m => m.UpdatedByName).HasColumnName("usrUpdatedByName").HasMaxLength(255).IsUnicode(false);
-            entity.Property(m => m.UpdatedOn).HasColumnName("usrUpdatedOn").HasDefaultValueSql("CURRENT_TIMESTAMP")
-                .ValueGeneratedOnAdd();
+            entity.Property(m => m.Name).HasColumnNameWithPrefix(Prefix).HasMaxLength(255).IsUnicode(false).IsRequired();
+            entity.Property(m => m.Email).HasColumnNameWithPrefix(Prefix).IsRequired();
+            entity.Property(m => m.LastLogin).HasColumnNameWithPrefix(Prefix);
+            entity.Property(m => m.IsActive).HasColumnNameWithPrefix(Prefix).HasDefaultValue(true).IsRequired();
+
+            entity.AddAuditFields(Prefix);
 
             entity.HasOne(o => o.UserPassword).WithOne().HasForeignKey<User>(e => e.Id)
                 .IsRequired();
@@ -40,10 +38,10 @@ public static class UserModelBuilder
         {
             entity.ToTable("rgh_user");
 
-            entity.HasKey(e => e.Id).HasName("rgh_user_pk");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(m => m.Id).HasColumnName("usrId").ValueGeneratedOnAdd();
-            entity.Property(m => m.Password).IsRequired().HasColumnName("usrPassword");
+            entity.Property(m => m.Id).HasColumnNameWithPrefix(Prefix).ValueGeneratedOnAdd();
+            entity.Property(m => m.Password).IsRequired().HasColumnNameWithPrefix(Prefix);
         });
     }
 }

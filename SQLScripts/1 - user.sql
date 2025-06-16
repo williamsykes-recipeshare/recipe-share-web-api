@@ -16,13 +16,17 @@ CREATE TABLE `rgh_user`
     `usrUpdatedByName`          VARCHAR(100)        NOT NULL,
     `usrUpdatedOn`              DATETIME            DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`usrId`)
+    -- KEY `fk_user_created_by_idx` (`usrCreatedBy`),
+    -- KEY `fk_user_updated_by_idx` (`usrUpdatedBy`),
+    -- CONSTRAINT `fk_user_created_by` FOREIGN KEY (`usrCreatedBy`) REFERENCES `rgh_user` (`usrId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    -- CONSTRAINT `fk_user_updated_by` FOREIGN KEY (`usrUpdatedBy`) REFERENCES `rgh_user` (`usrId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE `rgh_right`
 (
     `rghId`                     BIGINT              NOT NULL,
     `rghParentId`               BIGINT              DEFAULT NULL,
-    `rghCode`                   VARCHAR(255)        NOT NULL,
+    `rghCode`                   VARCHAR(255)        UNIQUE NOT NULL,
     `rghName`                   VARCHAR(255)        NOT NULL,
     `rghURL`                    TEXT,
     `rghIsMenu`                 BIT(1)              DEFAULT b'0' NOT NULL ,
@@ -56,6 +60,7 @@ CREATE TABLE `rgh_user_right`
     `urgUpdatedByName`          VARCHAR(100)        NOT NULL,
     `urgUpdatedOn`              DATETIME            DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`urgId`),
+    UNIQUE KEY `rgh_user_right_user_right_unq_k` (`urgUserId`, `urgRightId`),
     KEY `fk_user_right_created_by_idx` (`urgCreatedBy`),
     KEY `fk_user_right_updated_by_idx` (`urgUpdatedBy`),
     KEY `fk_user_right_right_idx` (`urgRightId`),
