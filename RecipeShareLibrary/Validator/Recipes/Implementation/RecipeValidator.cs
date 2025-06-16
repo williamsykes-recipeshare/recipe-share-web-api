@@ -16,6 +16,9 @@ public class RecipeValidator : IRecipeValidator
         if (string.IsNullOrWhiteSpace(save.Name))
             throw new BadRequestException("Invalid name.");
 
+        if (save.CookingTimeMinutes < 0)
+            throw new BadRequestException("Invalid cooking time.");
+
         if (save.Steps != null)
         {
             foreach (var step in save.Steps)
