@@ -23,6 +23,8 @@ public class RecipeValidator : IRecipeValidator
                 if (string.IsNullOrWhiteSpace(step.Name))
                     throw new BadRequestException("Invalid step name.");
 
+                // TODO: Maybe make sure there aren't duplicate indexes?
+
                 if (step.Index < 0)
                     throw new BadRequestException("Invalid step index.");
             }
