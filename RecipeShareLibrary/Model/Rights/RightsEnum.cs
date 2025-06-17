@@ -8,9 +8,4 @@ public abstract class RightsEnum
         MasterData = 2,
         Project = 3,
     }
-
-    public enum EnumUserVerifyType
-    {
-        Email = 0,
-    }
 }
