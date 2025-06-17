@@ -59,5 +59,6 @@ public class SeedData : TestWithSqlite
     private static async Task AllMasterData(RecipeShareDbContext dbContext)
     {
         await MasterData.IngredientData.SeedData(dbContext);
+        await MasterData.DietaryTagData.SeedData(dbContext);
     }
 }
