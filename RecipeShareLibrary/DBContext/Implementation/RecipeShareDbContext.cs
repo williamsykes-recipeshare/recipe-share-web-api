@@ -15,7 +15,6 @@ public class RecipeShareDbContext(DbContextOptions<RecipeShareDbContext> options
     public virtual DbSet<UserRight> UserRights => Set<UserRight>();
     public virtual DbSet<UserToken> UserTokens => Set<UserToken>();
     public virtual DbSet<Right> Rights => Set<Right>();
-    public virtual DbSet<UserVerifyToken> UserVerifyTokens => Set<UserVerifyToken>();
 
     #endregion
 
