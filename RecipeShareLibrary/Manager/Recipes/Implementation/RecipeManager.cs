@@ -25,7 +25,8 @@ public class RecipeManager(
                 .ThenInclude(x => x.Ingredient)
             .Include(x => x.RecipeDietaryTags!)
                 .ThenInclude(x => x.DietaryTag)
-            .Include(x => x.Steps!);
+            .Include(x => x.Steps!)
+            .OrderByDescending(x => x.CreatedOn);
     }
 
     /// <summary>
@@ -106,6 +107,7 @@ public class RecipeManager(
             {
                 Guid = save.Guid,
                 Name = save.Name,
+                RecipeDietaryTags = [],
                 RecipeIngredients = [],
                 Steps = [],
                 CreatedById = user.Id,
