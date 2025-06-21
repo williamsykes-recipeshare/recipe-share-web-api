@@ -9,8 +9,9 @@ public abstract class RightsEnum
         Project = 3,
     }
 
-    public enum EnumUserVerifyType
+    public enum EnumUserRole
     {
-        Email = 0,
+        Admin = 1,
+        User = 2,
     }
 }
