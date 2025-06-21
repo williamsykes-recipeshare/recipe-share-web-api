@@ -13,7 +13,7 @@ namespace RecipeShareWebApi.Controllers.Recipes;
 public class RecipeController(IRecipeService recipeService) : Controller
 {
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     [ActionName("GetList")]
     public async Task<ActionResult<IEnumerable<IRecipe>>> GetList(CancellationToken cancellationToken = default)
     {

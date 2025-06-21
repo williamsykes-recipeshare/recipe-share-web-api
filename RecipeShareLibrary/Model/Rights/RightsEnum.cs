@@ -8,4 +8,10 @@ public abstract class RightsEnum
         MasterData = 2,
         Project = 3,
     }
+
+    public enum EnumUserRole
+    {
+        Admin = 1,
+        User = 2,
+    }
 }

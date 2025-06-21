@@ -23,6 +23,8 @@ public class RecipeManager(
         return dbContext.Recipes
             .Include(x => x.RecipeIngredients!)
                 .ThenInclude(x => x.Ingredient)
+            .Include(x => x.RecipeDietaryTags!)
+                .ThenInclude(x => x.DietaryTag)
             .Include(x => x.Steps!);
     }
 
