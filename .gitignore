@@ -6,6 +6,7 @@ riderModule.iml
 .idea
 /publish
 publish.zip
+BenchmarkDotNet.Artifacts/
 RecipeShareWebApi/appsettings.Development.json
 RecipeShareWebApi/appsettings.json
 RecipeShareWebApi.sln.DotSettings
