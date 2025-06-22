@@ -19,6 +19,11 @@ public class RecipeService(IRecipeManager recipeManager, IHttpContextAccessor ht
         return await recipeManager.GetListAsync(cancellationToken);
     }
 
+    public async Task<IEnumerable<IRecipe>> GetFilteredListAsync(RecipeFilters filters, CancellationToken cancellationToken)
+    {
+        return await recipeManager.GetFilteredListAsync(filters, cancellationToken);
+    }
+
     public async Task<IRecipe> SaveAsync(IRecipe save)
     {
         if (_httpContext?.Items["User"] is not IUser user) throw new ForbiddenException("");
