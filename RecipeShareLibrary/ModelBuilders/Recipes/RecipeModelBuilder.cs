@@ -26,7 +26,7 @@ public static class RecipeModelBuilder
 
             entity.AddAuditFields(Prefix);
 
-            entity.HasMany(m => m.Steps).WithOne(m => m.Recipe).HasForeignKey(p => p.RecipeId);
+            entity.HasMany(m => m.Steps).WithOne().HasForeignKey(p => p.RecipeId);
         });
     }
 }

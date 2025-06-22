@@ -232,30 +232,30 @@ public class RecipeManager(
 
         if (result.Steps != null && save.Steps != null)
         {
+            // Deactivate all existing steps (or remove them)
+            foreach (var existingStep in result.Steps)
+            {
+                dbContext.Remove(existingStep);
+            }
+
+            result.Steps.Clear();
+
+            // Add fresh ones
             foreach (var saveStep in save.Steps)
             {
-                var step = result.Steps.FirstOrDefault(x => x.Id == saveStep.Id);
-
-                if (step == null)
+                var newStep = new Step
                 {
-                    step = new Step
-                    {
-                        Guid = saveStep.Guid,
-                        Name = saveStep.Name,
-                        CreatedById = user.Id,
-                        CreatedByName = user.Name,
-                        UpdatedById = user.Id,
-                        UpdatedByName = user.Name,
-                    };
+                    Guid = saveStep.Guid,
+                    Name = saveStep.Name,
+                    Index = saveStep.Index,
+                    IsActive = saveStep.IsActive,
+                    CreatedById = user.Id,
+                    CreatedByName = user.Name,
+                    UpdatedById = user.Id,
+                    UpdatedByName = user.Name,
+                };
 
-                    result.Steps.Add(step);
-                }
-
-                step.Name = saveStep.Name;
-                step.Index = saveStep.Index;
-                step.IsActive = saveStep.IsActive;
-                step.UpdatedById = user.Id;
-                step.UpdatedByName = user.Name;
+                result.Steps.Add(newStep);
             }
         }
 
@@ -270,6 +270,12 @@ public class RecipeManager(
             .Collection(x => x.RecipeIngredients!)
             .Query()
             .Include(x => x.Ingredient!)
+            .LoadAsync();
+
+        await dbContext.Entry(result)
+            .Collection(x => x.RecipeDietaryTags!)
+            .Query()
+            .Include(x => x.DietaryTag!)
             .LoadAsync();
 
         await dbContext.Entry(result)
