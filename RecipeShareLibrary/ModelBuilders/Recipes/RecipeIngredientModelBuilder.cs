@@ -21,7 +21,7 @@ public static class RecipeIngredientModelBuilder
             entity.Property(m => m.Id).HasColumnNameWithPrefix(Prefix).ValueGeneratedOnAdd();
             entity.Property(m => m.IngredientId).HasColumnNameWithPrefix(Prefix).IsRequired();
             entity.Property(m => m.RecipeId).HasColumnNameWithPrefix(Prefix).IsRequired();
-            entity.Property(m => m.Quantity).HasColumnNameWithPrefix(Prefix).IsRequired();
+            entity.Property(m => m.Quantity).HasColumnNameWithPrefix(Prefix).HasMaxLength(255).IsUnicode(false).IsRequired();
 
             entity.AddAuditFields(Prefix);
 

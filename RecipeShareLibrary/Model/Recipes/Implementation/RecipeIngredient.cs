@@ -8,5 +8,5 @@ public class RecipeIngredient : BaseModel, IRecipeIngredient
     public Ingredient? Ingredient { get; set; }
     public long RecipeId { get; set; }
 
-    public int Quantity { get; set; }
+    public required string Quantity { get; set; }
 }

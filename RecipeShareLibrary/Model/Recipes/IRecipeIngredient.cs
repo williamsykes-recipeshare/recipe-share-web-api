@@ -8,5 +8,5 @@ public interface IRecipeIngredient : IBaseModel
     Ingredient? Ingredient { get; set; }
     long RecipeId { get; set; }
 
-    int Quantity { get; set; }
+    string Quantity { get; set; }
 }
