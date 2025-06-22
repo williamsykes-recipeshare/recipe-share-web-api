@@ -26,8 +26,6 @@ public static class StepModelBuilder
             entity.Property(m => m.Name).HasColumnNameWithPrefix(Prefix).HasMaxLength(255).IsUnicode(false).IsRequired();
 
             entity.AddAuditFields(Prefix);
-
-            entity.HasOne(m => m.Recipe).WithMany(m => m.Steps).HasForeignKey(p => p.RecipeId);
         });
     }
 }

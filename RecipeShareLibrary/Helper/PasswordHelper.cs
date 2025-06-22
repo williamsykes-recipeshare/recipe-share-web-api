@@ -163,7 +163,7 @@ public static class PasswordHelper
 
         return data;
     }
-    
+
     public static IEnumerable<IUser> WithoutPasswords(this IEnumerable<IUser> users)
     {
         return users.Select(x => WithoutPassword(x));

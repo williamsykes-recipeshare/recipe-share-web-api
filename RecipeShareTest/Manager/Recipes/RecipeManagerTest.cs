@@ -1,20 +1,20 @@
 using FluentAssertions;
-using RecipeShareLibrary.Manager.MasterData;
-using RecipeShareLibrary.Manager.MasterData.Implementation;
+using RecipeShareLibrary.Manager.Recipes;
+using RecipeShareLibrary.Manager.Recipes.Implementation;
 using RecipeShareLibrary.Manager.Rights;
 using RecipeShareLibrary.Model.CustomExceptions;
-using RecipeShareLibrary.Model.MasterData;
-using RecipeShareLibrary.Validator.MasterData.Implementation;
+using RecipeShareLibrary.Model.Recipes;
+using RecipeShareLibrary.Validator.Recipes.Implementation;
 using RecipeShareTest.Helpers;
 using RecipeShareTest.Helpers.Manager;
-using RecipeShareTest.TestData.Arguments.MasterData;
+using RecipeShareTest.TestData.Arguments.Recipes;
 using Xunit;
 
 namespace RecipeShareTest.Manager.MasterData;
 
-public class IngredientManagerTest : TestWithSqlite
+public class RecipeManagerTest : TestWithSqlite
 {
-    private IIngredientManager? _ingredientManager;
+    private IRecipeManager? _recipeManager;
     private IUserManager? _userManager;
 
     [Fact]
@@ -29,17 +29,18 @@ public class IngredientManagerTest : TestWithSqlite
         await using var dbContext = await DbFactory().CreateDbContextAsync();
         await TestData.Rights.RightData.SeedData(dbContext);
         await TestData.Rights.UserData.SeedData(dbContext);
+        await TestData.MasterData.DietaryTagData.SeedData(dbContext);
         await TestData.MasterData.IngredientData.SeedData(dbContext);
+        await TestData.Recipes.RecipeData.SeedData(dbContext);
 
         _userManager = RightsManagerHelper.CreateUserManager(DbFactory);
-        _ingredientManager = new IngredientManager(DbFactory(), new IngredientValidator());
+        _recipeManager = new RecipeManager(DbFactory(), new RecipeValidator());
     }
 
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    [InlineData(3)]
-    public async Task GetAsync_ValidId_ReturnIngredient(long id)
+    public async Task GetAsync_ValidId_ReturnRecipe(long id)
     {
         #region Arrange
 
@@ -48,12 +49,12 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        var result = await _ingredientManager!.GetAsync(id);
+        var result = await _recipeManager!.GetAsync(id);
 
         #region Assert
 
         result.Should().NotBeNull()
-            .And.Match<IIngredient>(x => x.Id == id);
+            .And.Match<IRecipe>(x => x.Id == id);
 
         #endregion
     }
@@ -71,17 +72,17 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        Func<Task> act = async () => await _ingredientManager!.GetAsync(id);
+        Func<Task> act = async () => await _recipeManager!.GetAsync(id);
 
         #region Assert
 
-        await act.Should().ThrowAsync<NotFoundException>().WithMessage("Invalid ingredient.");
+        await act.Should().ThrowAsync<NotFoundException>().WithMessage("Invalid recipe.");
 
         #endregion
     }
 
     [Fact]
-    public async Task GetListAsync_NoArgs_ReturnIngredients()
+    public async Task GetListAsync_NoArgs_ReturnRecipes()
     {
         #region Arrange
 
@@ -90,7 +91,7 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        var result = await _ingredientManager!.GetListAsync();
+        var result = await _recipeManager!.GetListAsync();
 
         #region Assert
 
@@ -101,9 +102,9 @@ public class IngredientManagerTest : TestWithSqlite
     }
 
     [Theory]
-    [InlineData(new long[] { 1, 2, 3 })]
+    [InlineData(new long[] { 1, 2 })]
     [InlineData(new long[] { 2 })]
-    public async Task GetListAsync_ValidIds_ReturnIngredients(long[] ids)
+    public async Task GetListAsync_ValidIds_ReturnRecipes(long[] ids)
     {
         #region Arrange
 
@@ -112,7 +113,7 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        var result = await _ingredientManager!.GetListAsync(ids);
+        var result = await _recipeManager!.GetListAsync(ids);
 
         #region Assert
 
@@ -135,18 +136,18 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        Func<Task> act = async () => await _ingredientManager!.GetListAsync(ids);
+        Func<Task> act = async () => await _recipeManager!.GetListAsync(ids);
 
         #region Assert
 
-        await act.Should().ThrowAsync<NotFoundException>().WithMessage("Invalid ingredient.");
+        await act.Should().ThrowAsync<NotFoundException>().WithMessage("Invalid recipe.");
 
         #endregion
     }
 
     [Theory]
-    [ClassData(typeof(IngredientInvalidSaveArgs))]
-    public async Task SaveAsync_InValidIngredient_ThrowsBadRequest(long userId, IIngredient save, string exception, Type exceptionType)
+    [ClassData(typeof(RecipeInvalidSaveArgs))]
+    public async Task SaveAsync_InValidRecipe_ThrowsBadRequest(long userId, IRecipe save, string exception, Type exceptionType)
     {
         #region Arrange
 
@@ -156,7 +157,7 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        Func<Task> act = async () => await _ingredientManager!.SaveAsync(user, save);
+        Func<Task> act = async () => await _recipeManager!.SaveAsync(user, save);
 
         // Assert
         await act.Should().ThrowAsync<Exception>()
@@ -164,8 +165,8 @@ public class IngredientManagerTest : TestWithSqlite
     }
 
     [Theory]
-    [ClassData(typeof(IngredientValidSaveArgs))]
-    public async Task SaveAsync_ValidIngredient_ReturnIngredient(long userId, IIngredient save)
+    [ClassData(typeof(RecipeValidSaveArgs))]
+    public async Task SaveAsync_ValidRecipe_ReturnRecipe(long userId, IRecipe save)
     {
         #region Arrange
 
@@ -175,7 +176,7 @@ public class IngredientManagerTest : TestWithSqlite
         #endregion
 
         // Act
-        var result = await _ingredientManager!.SaveAsync(user, save);
+        var result = await _recipeManager!.SaveAsync(user, save);
 
         // Assert
         result.Id.Should().BeGreaterThan(0);
@@ -185,6 +186,9 @@ public class IngredientManagerTest : TestWithSqlite
             .And.BeEquivalentTo(save, config =>
                 config
                     .Excluding(x => x.Id)
+                    .Excluding(x => x.RecipeIngredients)
+                    .Excluding(x => x.RecipeDietaryTags)
+                    .Excluding(x => x.Steps)
                     .Excluding(x => x.CreatedById)
                     .Excluding(x => x.CreatedByName)
                     .Excluding(x => x.CreatedOn)
@@ -193,7 +197,27 @@ public class IngredientManagerTest : TestWithSqlite
                     .Excluding(x => x.UpdatedOn)
                     .Excluding(x => x.IsActive));
 
-        var inserted = await _ingredientManager!.GetAsync(result.Id);
+        result.RecipeIngredients.Should().NotBeNull();
+        result.RecipeIngredients.Should().HaveCount(save.RecipeIngredients!.Count);
+        result.RecipeIngredients!.Where(x => x.IsActive == true).Should()
+            .OnlyContain(x => save.RecipeIngredients.Any(y => x.IngredientId == y.IngredientId && x.Quantity == y.Quantity));
+
+        result.RecipeDietaryTags.Should().NotBeNull();
+        result.RecipeDietaryTags.Should().HaveCount(save.RecipeDietaryTags!.Count);
+        result.RecipeDietaryTags!.Where(x => x.IsActive == true).Should()
+            .OnlyContain(x => save.RecipeDietaryTags.Any(y => x.DietaryTagId == y.DietaryTagId));
+
+        result.Steps.Should().NotBeNull();
+        foreach (var step in result.Steps!)
+        {
+            var expectedStep = save.Steps!.SingleOrDefault(s => s.Guid == step.Guid);
+            expectedStep.Should().NotBeNull();
+            step.Name.Should().Be(expectedStep!.Name);
+            step.Index.Should().Be(expectedStep.Index);
+            step.IsActive.Should().Be(expectedStep.IsActive);
+        }
+
+        var inserted = await _recipeManager!.GetAsync(result.Id);
 
         result.Should().NotBeNull()
             .And.BeEquivalentTo(inserted, config =>
