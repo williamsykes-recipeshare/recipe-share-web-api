@@ -19,13 +19,13 @@ public class RecipeValidator : IRecipeValidator
         if (save.CookingTimeMinutes < 0)
             throw new BadRequestException("Invalid cooking time.");
 
-        if (save.RecipeIngredients != null && save.RecipeIngredients.Select(x => x.IngredientId).Any(x => x <= 0))
+        if (save.RecipeIngredients != null && save.RecipeIngredients.Any(x => x.IngredientId <= 0))
             throw new BadRequestException("Invalid ingredient ID(s).");
 
-        if (save.RecipeIngredients != null && save.RecipeIngredients.Select(x => x.Quantity).Any(x => x < 0))
+        if (save.RecipeIngredients != null && save.RecipeIngredients.Select(x => x.Quantity).Any(y => string.IsNullOrWhiteSpace(y)))
             throw new BadRequestException("Invalid ingredient quantities.");
 
-        if (save.RecipeDietaryTags != null && save.RecipeDietaryTags.Select(x => x.DietaryTagId).Any(x => x <= 0))
+        if (save.RecipeDietaryTags != null && save.RecipeDietaryTags.Any(x => x.DietaryTagId <= 0))
             throw new BadRequestException("Invalid dietary tag ID(s).");
 
         if (save.Steps != null)

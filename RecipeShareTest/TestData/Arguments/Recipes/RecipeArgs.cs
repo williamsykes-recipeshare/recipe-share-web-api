@@ -36,7 +36,7 @@ namespace RecipeShareTest.TestData.Arguments.Recipes
                 new RecipeIngredient
                 {
                     IngredientId = 0,
-                    Quantity = 1,
+                    Quantity = "100g",
                     CreatedById = 1,
                     CreatedByName = "Tester",
                     UpdatedById = 1,
@@ -52,7 +52,7 @@ namespace RecipeShareTest.TestData.Arguments.Recipes
                 new RecipeIngredient
                 {
                     IngredientId = 1,
-                    Quantity = -5,
+                    Quantity = "  ",
                     CreatedById = 1,
                     CreatedByName = "Tester",
                     UpdatedById = 1,
@@ -173,7 +173,7 @@ namespace RecipeShareTest.TestData.Arguments.Recipes
                 new RecipeIngredient
                 {
                     IngredientId = 1,
-                    Quantity = 100,
+                    Quantity = "100g",
                     CreatedById = 1,
                     CreatedByName = "Tester",
                     UpdatedById = 1,

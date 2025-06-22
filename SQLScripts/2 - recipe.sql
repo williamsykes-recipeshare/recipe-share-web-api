@@ -45,7 +45,7 @@ CREATE TABLE `mtn_recipe_ingredient`
     `rpiId`             BIGINT                      NOT NULL AUTO_INCREMENT,
     `rpiRecipeId`       BIGINT                      NOT NULL,
     `rpiIngredientId`   BIGINT                      NOT NULL,
-    `rpiQuantity`       SMALLINT                    NOT NULL,
+    `rpiQuantity`       VARCHAR(255)                NOT NULL,
     `rpiIsActive`       BIT(1)                      NOT NULL DEFAULT b'1',
     `rpiCreatedBy`      BIGINT                      NOT NULL,
     `rpiCreatedByName`  VARCHAR(100)                NOT NULL,

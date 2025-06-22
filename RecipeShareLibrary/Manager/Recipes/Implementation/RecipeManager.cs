@@ -173,6 +173,7 @@ public class RecipeManager(
                     recipeIngredient = new RecipeIngredient
                     {
                         IngredientId = saveRecipeIngredient.IngredientId,
+                        Quantity = saveRecipeIngredient.Quantity,
                         CreatedById = user.Id,
                         CreatedByName = user.Name,
                         UpdatedById = user.Id,
