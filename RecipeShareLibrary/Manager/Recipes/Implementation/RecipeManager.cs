@@ -31,7 +31,7 @@ public class RecipeManager(
 
     /// <summary>
     /// Returns a single recipe based on the specified ID.
-    /// An exception is thrown if no record matching the ID was found
+    /// /// An exception is thrown if no record matching the ID was found
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -73,6 +73,30 @@ public class RecipeManager(
             throw new NotFoundException("Invalid recipe.");
 
         return await resultQuery.ToListAsync(cancellationToken);
+    }
+
+    public async Task<IEnumerable<IRecipe>> GetFilteredListAsync(RecipeFilters filters, CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+        var query = GetQuery(dbContext);
+
+        if (!string.IsNullOrWhiteSpace(filters.Name))
+        {
+            query = query.Where(x => x.Name.Contains(filters.Name));
+        }
+
+        if (filters.IngredientIds != null && filters.IngredientIds.Count != 0)
+        {
+            query = query.Where(r => r.RecipeIngredients!.Any(x => filters.IngredientIds.Contains(x.IngredientId)));
+        }
+
+        if (filters.DietaryTagIds != null && filters.DietaryTagIds.Count != 0)
+        {
+            query = query.Where(r => r.RecipeDietaryTags!.Any(x => filters.DietaryTagIds.Contains(x.DietaryTagId)));
+        }
+
+        return await query.ToListAsync(cancellationToken);
     }
 
     #endregion
