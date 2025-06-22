@@ -21,8 +21,8 @@ public static class RecipeData
         UpdatedByName = "Tester",
         RecipeIngredients = new List<RecipeIngredient>
         {
-            new RecipeIngredient { Id = 1, RecipeId = 1, IngredientId = 1, Quantity = 100, CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true },
-            new RecipeIngredient { Id = 2, RecipeId = 1, IngredientId = 2, Quantity = 200, CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true },
+            new RecipeIngredient { Id = 1, RecipeId = 1, IngredientId = 1, Quantity = "100g", CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true },
+            new RecipeIngredient { Id = 2, RecipeId = 1, IngredientId = 2, Quantity = "200g", CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true },
         },
         RecipeDietaryTags = new List<RecipeDietaryTag>
         {
@@ -44,7 +44,7 @@ public static class RecipeData
         UpdatedByName = "Tester",
         RecipeIngredients = new List<RecipeIngredient>
         {
-            new RecipeIngredient { Id = 3, RecipeId = 2, IngredientId = 3, Quantity = 150, CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true }
+            new RecipeIngredient { Id = 3, RecipeId = 2, IngredientId = 3, Quantity = "150g", CreatedById = 1, CreatedByName = "Tester", UpdatedById = 1, UpdatedByName = "Tester", IsActive = true }
         },
         RecipeDietaryTags = new List<RecipeDietaryTag>
         {
