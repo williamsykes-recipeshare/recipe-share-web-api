@@ -21,6 +21,15 @@ public class RecipeController(IRecipeService recipeService) : Controller
         return Ok(result);
     }
 
+    [HttpPost]
+    // [Authorize]
+    [ActionName("GetFilteredList")]
+    public async Task<ActionResult<IEnumerable<IRecipe>>> GetFilteredList([FromBody] RecipeFilters filters, CancellationToken cancellationToken = default)
+    {
+        var result = await recipeService.GetFilteredListAsync(filters, cancellationToken);
+        return Ok(result);
+    }
+
     [HttpGet]
     [Authorize]
     [ActionName("Get")]
