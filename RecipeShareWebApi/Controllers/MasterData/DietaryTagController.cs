@@ -15,7 +15,7 @@ namespace RecipeShareWebApi.Controllers.MasterData;
 public class DietaryTagController(IDietaryTagService dietaryTagService) : Controller
 {
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     [ActionName("GetList")]
     public async Task<ActionResult<IEnumerable<IDietaryTag>>> GetList(CancellationToken cancellationToken = default)
     {
