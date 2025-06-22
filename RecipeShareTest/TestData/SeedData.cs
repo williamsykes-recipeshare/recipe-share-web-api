@@ -47,6 +47,7 @@ public class SeedData : TestWithSqlite
     {
         await AllRights(dbContext);
         await AllMasterData(dbContext);
+        await AllRecipeData(dbContext);
     }
 
     private static async Task AllRights(RecipeShareDbContext dbContext)
@@ -60,5 +61,10 @@ public class SeedData : TestWithSqlite
     {
         await MasterData.IngredientData.SeedData(dbContext);
         await MasterData.DietaryTagData.SeedData(dbContext);
+    }
+
+    private static async Task AllRecipeData(RecipeShareDbContext dbContext)
+    {
+        await Recipes.RecipeData.SeedData(dbContext);
     }
 }
