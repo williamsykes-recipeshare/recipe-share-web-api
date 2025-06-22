@@ -145,6 +145,57 @@ public class RecipeManagerTest : TestWithSqlite
         #endregion
     }
 
+    [Fact]
+    public async Task GetFilteredListAsync_IncorrectFilters_ReturnRecipes()
+    {
+        #region Arrange
+
+        await SetUp();
+
+        var filters = new RecipeFilters
+        {
+            Name = "chicken", // We have "Chicken" in our test data so this is a case test as well
+            IngredientIds = new List<long> { 0 },
+            DietaryTagIds = new List<long> { 100 }
+        };
+
+        #endregion
+
+        // Act
+        var result = await _recipeManager!.GetFilteredListAsync(filters);
+
+        // Assert
+        result.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task GetFilteredListAsync_CorrectFilters_ReturnRecipes()
+    {
+        #region Arrange
+
+        await SetUp();
+
+        var filters = new RecipeFilters
+        {
+            Name = "chicken", // We have "Chicken" in our test data so this is a case test as well
+            IngredientIds = new List<long> { 1 },
+            DietaryTagIds = new List<long> { 2 }
+        };
+
+        #endregion
+
+        // Act
+        var result = await _recipeManager!.GetFilteredListAsync(filters);
+
+        // Assert
+        result.Should().NotBeEmpty();
+        result.Should().OnlyContain(recipe =>
+            recipe.Name.Contains(filters.Name, StringComparison.OrdinalIgnoreCase)
+            && recipe.RecipeIngredients!.Any(x => filters.IngredientIds.Contains(x.IngredientId))
+            && recipe.RecipeDietaryTags!.Any(x => filters.DietaryTagIds.Contains(x.DietaryTagId))
+        );
+    }
+
     [Theory]
     [ClassData(typeof(RecipeInvalidSaveArgs))]
     public async Task SaveAsync_InValidRecipe_ThrowsBadRequest(long userId, IRecipe save, string exception, Type exceptionType)
