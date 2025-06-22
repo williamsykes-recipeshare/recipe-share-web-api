@@ -77,24 +77,24 @@ public class RecipeManager(
 
     public async Task<IEnumerable<IRecipe>> GetFilteredListAsync(RecipeFilters filters, CancellationToken cancellationToken = default)
     {
-        await using var dbContext = await dbContextFactory.CreateDbContextAsync();
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
 
-        var query = GetQuery(dbContext);
-
-        if (!string.IsNullOrWhiteSpace(filters.Name))
-        {
-            query = query.Where(x => x.Name.Contains(filters.Name));
-        }
-
-        if (filters.IngredientIds != null && filters.IngredientIds.Count != 0)
-        {
-            query = query.Where(r => r.RecipeIngredients!.Any(x => filters.IngredientIds.Contains(x.IngredientId)));
-        }
-
-        if (filters.DietaryTagIds != null && filters.DietaryTagIds.Count != 0)
-        {
-            query = query.Where(r => r.RecipeDietaryTags!.Any(x => filters.DietaryTagIds.Contains(x.DietaryTagId)));
-        }
+        var query = GetQuery(dbContext)
+            .Where(x => string.IsNullOrWhiteSpace(filters.Name) || EF.Functions.Like(x.Name.ToLower(), $"%{filters.Name.ToLower()}%"))
+            .Where(x =>
+                filters.IngredientIds == null ||
+                filters.IngredientIds.Count == 0 ||
+                x.RecipeIngredients!.Any(y =>
+                    filters.IngredientIds.Contains(y.IngredientId)
+                )
+            )
+            .Where(x =>
+                filters.DietaryTagIds == null ||
+                filters.DietaryTagIds.Count == 0 ||
+                x.RecipeDietaryTags!.Any(y =>
+                    filters.DietaryTagIds.Contains(y.DietaryTagId)
+                )
+            );
 
         return await query.ToListAsync(cancellationToken);
     }
