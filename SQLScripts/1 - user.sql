@@ -16,10 +16,6 @@ CREATE TABLE `rgh_user`
     `usrUpdatedByName`          VARCHAR(100)        NOT NULL,
     `usrUpdatedOn`              DATETIME            DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`usrId`)
-    -- KEY `fk_user_created_by_idx` (`usrCreatedBy`),
-    -- KEY `fk_user_updated_by_idx` (`usrUpdatedBy`),
-    -- CONSTRAINT `fk_user_created_by` FOREIGN KEY (`usrCreatedBy`) REFERENCES `rgh_user` (`usrId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    -- CONSTRAINT `fk_user_updated_by` FOREIGN KEY (`usrUpdatedBy`) REFERENCES `rgh_user` (`usrId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE `rgh_right`
