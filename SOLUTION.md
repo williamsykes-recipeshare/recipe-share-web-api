@@ -42,6 +42,13 @@
 - **Secrets Management:**
   Connection strings and other sensitive config are **excluded from the public Git repository** via `.gitignore` and environment variables, to prevent accidental credential leaks.
 
+- **Recipe Data Loading Strategy:**
+  Currently, the frontend **loads all active recipes in one API request**. This is acceptable for this project’s small dataset (5 recipes), simplifying frontend logic and reducing API call overhead due to limited VM resources.
+
+  **Trade-off:** In real-world applications with large datasets, loading all data at once is inefficient and could degrade performance due to large payloads and memory usage. A scalable approach would implement **pagination** and **lazy loading**, fetching smaller chunks of data on demand and server-side filtering.
+
+  The API supports filtered requests for recipes, but they are not utilized here due to project scope and hosting constraints.
+
 ---
 
 ## 🔒 Security & Monitoring Notes
@@ -71,4 +78,3 @@ This solution shows a typical full-stack architecture:
 - **React TypeScript client** with secure API consumption.
 - Intentional complexity in relational data models to demonstrate real-world design.
 - Cost and simplicity trade-offs acknowledged for future improvements.
-

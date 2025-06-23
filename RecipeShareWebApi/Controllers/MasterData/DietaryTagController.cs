@@ -1,10 +1,8 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RecipeShareLibrary.Helper;
 using RecipeShareLibrary.Model.MasterData;
 using RecipeShareLibrary.Model.MasterData.Implementation;
-using RecipeShareWebApi.CustomAttributes;
 using RecipeShareWebApi.Services.MasterData;
 
 namespace RecipeShareWebApi.Controllers.MasterData;
@@ -15,7 +13,6 @@ namespace RecipeShareWebApi.Controllers.MasterData;
 public class DietaryTagController(IDietaryTagService dietaryTagService) : Controller
 {
     [HttpGet]
-    // [Authorize]
     [ActionName("GetList")]
     public async Task<ActionResult<IEnumerable<IDietaryTag>>> GetList(CancellationToken cancellationToken = default)
     {
@@ -24,7 +21,6 @@ public class DietaryTagController(IDietaryTagService dietaryTagService) : Contro
     }
 
     [HttpGet]
-    [Authorize]
     [ActionName("Get")]
     public async Task<ActionResult<IDietaryTag>> Get(long id)
     {
@@ -36,7 +32,6 @@ public class DietaryTagController(IDietaryTagService dietaryTagService) : Contro
     [MapToApiVersion("1.0")]
     [Authorize]
     [ActionName("Save")]
-    // [RightsRequirement(RightConstants.MasterData)]
     public async Task<ActionResult<IDietaryTag>> Save(DietaryTag save)
     {
         var result = await dietaryTagService.SaveAsync(save);
