@@ -6,7 +6,7 @@ Intel Core i9-9980HK CPU 2.40GHz, 1 CPU, 16 logical and 8 physical cores
   [Host]     : .NET 8.0.11 (8.0.1124.51707), X64 RyuJIT AVX2
   Job-JEOVOY : .NET 8.0.11 (8.0.1124.51707), X64 RyuJIT AVX2
 
-IterationCount=500  LaunchCount=1  WarmupCount=1  
+IterationCount=500  LaunchCount=1  WarmupCount=1
 
 ```
 |                       Method |    Mean |    Error |   StdDev |   Median | Allocated |
