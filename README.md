@@ -1,4 +1,17 @@
-# Recipe Share Application
+# Recipe Share
+
+A simple full-stack recipe sharing system.
+It includes a secure .NET Core 8.0 Web API with JWT authentication, a React TypeScript web front-end, and a MySQL database.
+The app demonstrates realistic CRUD operations for recipes, ingredients, dietary tags, and steps, plus user login/register, deployed using Azure, Google Cloud, and Firebase Hosting.
+
+---
+
+| Resource                       | Link                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------- |
+| **Firebase Hosted Web App**    | [Visit Web App](https://recipeshare-williamsykes.web.app)                      |
+| **Azure Deployed API Swagger** | [API Swagger Docs](https://recipesharewebapi-a8fgg5atajb0gvdr.southafricanorth-01.azurewebsites.net/swagger/index.html) |
+
+---
 
 ## Architecture Diagram
 

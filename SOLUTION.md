@@ -11,12 +11,13 @@
 - **Database:**
   - **MySQL** database hosted on **Google Cloud Platform (GCP)**.
   - Structured relational tables for **recipes, ingredients, dietary tags, steps**, with bridging tables for many-to-many relations.
-  - ERD diagram provided in the repository (`dab.png`).
+  - ERD diagram provided in the repository (`recipe-share-ERD.png`).
 
 - **Frontend Web App:**
   - Developed in **React + TypeScript**.
   - Consumes the secured API for all CRUD operations.
-  - Local `.env` or `appsettings` controls API base URLs.
+  - Deployed using **Firebase Hosting** for fast static site delivery.
+  - Includes **Firebase configuration and deploy scripts** to streamline deployment.
 
 - **Testing & Benchmarking:**
   - Unit tests at the **Manager** layer to validate core logic.
@@ -57,6 +58,7 @@
 
 - **Azure App Service:** incurs standard hosting fees based on resource tier.
 - **Google Cloud SQL:** charged for compute, storage, and network egress between GCP and Azure.
+- **Firebase Hosting** (Web App) → free for light personal or demo use (Spark plan).
 - In a production scenario, cheaper alternatives like **Hetzner Cloud VMs** or **Oracle Free Tier VMs** could dramatically lower costs for small-scale deployments.
 - Ideally, unify API and DB hosting on a single provider to avoid cross-cloud charges and simplify ops.
 
