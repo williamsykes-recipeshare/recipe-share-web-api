@@ -1,5 +1,29 @@
 USE recipe_share;
 
+INSERT INTO `rgh_user` (
+    `usrGuid`,
+    `usrName`,
+    `usrEmail`,
+    `usrPassword`,
+    `usrLastLogin`,
+    `usrIsActive`,
+    `usrCreatedBy`,
+    `usrCreatedByName`,
+    `usrUpdatedBy`,
+    `usrUpdatedByName`
+) VALUES (
+    UNHEX(REPLACE('a1111111-1111-1111-1111-111111111111', '-', '')),
+    'William',
+    'williamsykesthe3rd@gmail.com',
+    HEX('wW!12345'),
+    NULL,
+    b'1',
+    0,
+    'William',
+    0,
+    'William'
+);
+
 -- ==========================================
 -- INGREDIENTS
 -- ==========================================

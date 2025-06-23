@@ -13,7 +13,6 @@ namespace RecipeShareWebApi.Controllers.Recipes;
 public class RecipeController(IRecipeService recipeService) : Controller
 {
     [HttpGet]
-    // [Authorize]
     [ActionName("GetList")]
     public async Task<ActionResult<IEnumerable<IRecipe>>> GetList(CancellationToken cancellationToken = default)
     {
@@ -22,7 +21,6 @@ public class RecipeController(IRecipeService recipeService) : Controller
     }
 
     [HttpPost]
-    // [Authorize]
     [ActionName("GetFilteredList")]
     public async Task<ActionResult<IEnumerable<IRecipe>>> GetFilteredList([FromBody] RecipeFilters filters, CancellationToken cancellationToken = default)
     {
@@ -31,7 +29,6 @@ public class RecipeController(IRecipeService recipeService) : Controller
     }
 
     [HttpGet]
-    [Authorize]
     [ActionName("Get")]
     public async Task<ActionResult<IRecipe>> Get(long id)
     {
@@ -43,7 +40,6 @@ public class RecipeController(IRecipeService recipeService) : Controller
     [MapToApiVersion("1.0")]
     [Authorize]
     [ActionName("Save")]
-    // [RightsRequirement(RightConstants.MasterData)]
     public async Task<ActionResult<IRecipe>> Save(Recipe save)
     {
         var result = await recipeService.SaveAsync(save);

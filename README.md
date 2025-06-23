@@ -53,7 +53,7 @@ IterationCount=500  LaunchCount=1  WarmupCount=1
 2. Create and seed the database by running the following SQL scripts in order:
    - `SQLScripts/1 - user.sql`
    - `SQLScripts/2 - recipe.sql`
-   - `SQLScripts/3 - seed.sql`
+   - `SQLScripts/3 - seed.sql` (Take note of the email address and password of the user - alter them or register a user through the web app before seeding the rest of the data. **Note: At least one user must exist to seed the data**)
 3. Update the connection string in `appsettings.Development.json` if needed to match your MySQL setup.
 4. Run the backend API with:
    ```bash
