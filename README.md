@@ -6,11 +6,12 @@ The app demonstrates realistic CRUD operations for recipes, ingredients, dietary
 
 ---
 
-| Resource                       | Link                                                                                                                    |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| **Firebase Hosted Web App**    | [YouTube Demo Video](https://youtu.be/DGvB1V9QRJg)                                                                      |
-| **Firebase Hosted Web App**    | [Visit Web App](https://recipeshare-williamsykes.web.app)                                                               |
-| **Azure Deployed API Swagger** | [API Swagger Docs](https://recipesharewebapi-a8fgg5atajb0gvdr.southafricanorth-01.azurewebsites.net/swagger/index.html) |
+| Resource                             | Link                                                                                                                    |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| **YouTube Demo Video**               | [YouTube Demo Video](https://youtu.be/DGvB1V9QRJg)                                                                      |
+| **YouTube Demo Video (Unedited)**    | [YouTube Demo Video (Unedited)](https://youtu.be/lgSLFYP33c4)                                                           |
+| **Firebase Hosted Web App**          | [Visit Web App](https://recipeshare-williamsykes.web.app)                                                               |
+| **Azure Deployed API Swagger**       | [API Swagger Docs](https://recipesharewebapi-a8fgg5atajb0gvdr.southafricanorth-01.azurewebsites.net/swagger/index.html) |
 
 ---
 
